@@ -5,13 +5,15 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{hyperref}
+\usepackage{graphicx}
 \author{Bertrand}
-\title{Electromagnetique et Antennes}
+\title{Electromagnetique et Méca Flux + rappels mathématiques}
 
 \begin{document} %%% BEGIN DOC
 
 \maketitle
 \tableofcontents
+\newpage
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -191,6 +193,33 @@ div(\overrightarrow{grad}(f)) = \Delta f
 \begin{equation}
 \overrightarrow{rot}(\overrightarrow{grad}(f)) = \overrightarrow{0}
 \end{equation}
+
+
+%%%%%%%%%%%%% EQUATION DE LAPLACE %%%%%%%%%%%%%
+\subsection{Équation de Laplace \cite{eqlaplace}}
+\subsubsection{Définition}
+En coordonnées cartésiennes dans un espace euclidine de dimension 3, le problème consiste à trouver lles fonctions $f(x,y,z)$ qui vérifient:
+\begin{equation}
+\frac{\partial^{2} f}{\partial x^{2}} + \frac{\partial^{2} f}{\partial y^{2}} + \frac{\partial^{2} f}{\partial z^{2}} = 0
+\end{equation}
+On introduit alors l'opérateur Laplacien noté $\Delta$, et l'équation devient:
+\begin{equation}
+\Delta f = 0
+\end{equation}
+L'opérateur peut aussi être noté $\nabla^{2}$ et il est aussi égal à $div(\overrightarrow{grad}(f))$.
+
+\subsubsection{Fontions harmoniques \cite{fharmonique}}
+Les fonctions harmoniques sont définies comme étant des fonctions deux fois continument dérivables et solution de l'équation de Laplace. Soit $U$ un ouvert de $\Re^{n}$. Une application $f : U \mapsto \Re$ est dite harmonique si:
+\begin{equation}
+\frac{\partial^{2} f}{\partial x_{1}^{2}} + \frac{\partial^{2} f}{\partial x_{2}^{2}} + \dotsb + \frac{\partial^{2} f}{\partial x_{n}^{2}} = 0
+\end{equation}
+
+\subsubsection{Résultats}
+En étudiant les solutions de l'équation, on prouve que:
+\begin{itemize}
+\item Toute fonction holomorphe\cite{fholomorphe} est harmonique.
+\item Les lignes de niveaux\cite{ligneniveau} de la partie réelle et imaginaire d'une fonction holomorphe sont orthogonales.
+\end{itemize}
 
 
 
@@ -383,6 +412,43 @@ Si un fluide est incompressible, non-visqueux et stationnaire il peut être rés
 La turbulence est un écoulement avec remous et un aspect aléatoire apparent. S'il n'y a pas de turbulences, l'écoulement est laminaire. Les turbulences obéissent à l'équation de Navier-Strokes, cependant la résolution est si complexe qu'il n'est pas possible actuellement de les résoudre numériquement avec les principes de base. Les turbulences sont plutôt modélisées avec un des nombreux modèles de turbulence couplée avec un résolveur de flux laminaires.
 
 
+\subsection{Formules de mécanique des fluides}
+\subsubsection{Nombre de Reynolds\cite{nbreynolds}}
+Le nombre de Reynolds est sans dimension. Il caractérise un écoulement: sa nature et son régime (laminaire, transitoire, turbulent ...). Il représente le rapport entre les forces d'intertie et les forces visqueuses. Il est définit tel que:
+\begin{equation}
+Re = \frac{VL}{\upsilon}
+\end{equation}
+Avec $V$ vitesse caractéristique du fluide ($m.s^{-1}$), $L$ dimension caractéristique ($m$), $\upsilon$ viscosité cinématique $(m^{2}.s^{-1})$.
+
+\subsubsection{Viscosité cinématique\cite{viscocinema}}
+La viscosité cinématique représente la capacité de rétention des particules du fluide et quantifie sa capacité à s'épancher. Elle est reliée à la viscosité dynamique par:
+\begin{equation}
+\upsilon = \frac{\mu}{\rho}
+\end{equation}
+Où $\upsilon$ est la viscosité cinématique ($m^{2}.s^{-1}$), $\mu$ le coefficient de viscosité dynamique ($Pa.s$), $\rho$ la masse volumique du fluide ($kg.m^{-3}$).
+
+\subsubsection{Viscosité dynamique\cite{viscodyna}}
+La viscosité est une mesure des fictions internes d'un fluide, qui apparait lorsqu'une tranche de fluide doit se déplacer par rapport à une autre. La figure \ref{fig:viscodyna} montre le modèle utilisé par Newton. Deux plans parallèles de fluides de surfaces égales $S$ sont séparés par une distance $dx$ et se déplacent dans la même direction à des vitesses $V$ et $V+dv$. Newton à supposé que la force nécessaire pour maintenir cette différence de vitesse était proportionnelle au gradient de vitesse. C'est à dire:
+\begin{equation}
+\frac{F}{S} = -\mu \frac{dv}{dx}
+\end{equation}
+Où $\mu$ est une constante pour un fluide donné, et appelé coefficient de viscosité dynamique. Le gradient de vitesse $\frac{dv}{dx}$ est une mesure de la variation de vitesse à laquelle les couches du fluides se déplacent l'une par rapport à l'autre; il décrit le cisaillement que subit le liquide, il est ainsi appelé taux de cisaillement. Le terme $\frac{F}{S}$ est appelé contrainte de cisaillement. Ainsi on peut définir le coefficient de viscosité dynamique comme le rapport de contrainte de cisaillement sur le taux de cisaillement.
+
+Pour développer son modèle Newton avait supposé que pour une température donnée, le coefficient de viscosité dynamique était indépendant du gradient de vitesse, i.e si on double la force le fluide se déplacera deux fois plus vite. Au vu des expérience, ce n'est que partiellement vrais. On distingue ainsi deux types de fluides:
+\begin{description}
+\item[Les fluides newtoniens] dont le coefficient de viscosité dynamique est indépendant du gradient de vitesse. C'est le cas des gaz, vapeurs, liquides purs de faible masse molaire
+\item[Les fluides non-newtoniens] dont le coefficient de viscosité dynamique dépend du gradient de vitesse. L'étude de ce type de fluides dépend de la rhéologie. Ces fluides sont beaucoup plus communs: purées, gels, sang, boues, peintures, solutions de polymères, ...
+\end{description}
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{viscodyna}
+\caption{Modèle de la viscosité}
+\label{fig:viscodyna}
+\end{figure}
+
+
+
+\newpage
 \bibliographystyle{plain}
 \bibliography{biblio}
 
