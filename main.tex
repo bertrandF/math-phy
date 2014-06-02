@@ -391,7 +391,7 @@ Si les changement de densité d'un fluide ont des effets significatif sur les r�
 
 Le nombre de Mach\cite{nbmach} permet de déterminer la compressibilité d'un fluide. On considère un fluide comme compressible pour des nombre de Mach supérieurs à $0.3$.
 
-Explication de la compressibilité: en acoustique, l'air doit être considéré comme un fluide compressible sinon la propagation du son dans l'air serait instantanée (vitesse infinie). Pour note, la vitesse de propagation du son dans un fluide de compressibilité $\chi$ est:
+Explication de la compressibilité: en acoustique, l'air doit être considéré comme un fluide compressible sinon la propagation du son dans l'air serait instantanée (vitesse infinie). Pour note, la vitesse de propagation du son\cite{vitesseson} dans un \textbf{liquide} de coefficient de compressibilité adiabatique $\chi$ est:
 \begin{equation}
 c^{2} = (\rho_{0}\chi)^{-1}
 \end{equation}
@@ -401,7 +401,7 @@ Dans les problèmes où les frottements entre les couches de fluides ont des eff
 
 Le nombre de Reynolds\cite{nbreynolds} est employé pour estimer quel type d'équations doit être utiliser pour résoudre un problème: pour des écoulements à faible nombre de Reynolds (près d'une paroi) l'écoulement est laminaire, on utilisera les équations de Navier-Strokes. Pour des nombres de Reynolds élevés, l'écoulement pourra être considéré comme non-visqueux (donc non laminaire) et les équations d'Euler seront utilisée.
 
-ATTENTION: il arrive que même si le nombre de Reynolds est élevé, il faille considérer les effets de viscosité, par exemple pour un écoulement autour d'une aile d'avion (cf paradoxe de D'Alembert\cite{paradoxealembert}).
+\textbf{ATTENTION}: il arrive que même si le nombre de Reynolds est élevé, il faille considérer les effets de viscosité, par exemple pour un écoulement autour d'une aile d'avion (cf paradoxe de D'Alembert\cite{paradoxealembert}).
 
 \subsubsection{Écoulement stationnaire et instationnaire}
 Le fluide est considéré comme stationnaire si toutes ses propriétés sont considérées comme constantes avec le temps. Ceci constitue une bonne approximation pour des problèmes tels que la trainée d'une aile, la poussée ou un fluide traversant un tuyau. Dans ce cas les équations de Navier-Strokes peuvent être simplifiées.
@@ -427,7 +427,7 @@ La viscosité cinématique représente la capacité de rétention des particules
 \end{equation}
 Où $\upsilon$ est la viscosité cinématique ($m^{2}.s^{-1}$), $\mu$ le coefficient de viscosité dynamique ($Pa.s$), $\rho$ la masse volumique du fluide ($kg.m^{-3}$).
 
-\subsubsection{Viscosité dynamique\cite{viscodyna}}
+\subsubsection{Viscosité dynamique\cite{viscodyna,viscodyna2,viscodyna3}}
 La viscosité est une mesure des fictions internes d'un fluide, qui apparait lorsqu'une tranche de fluide doit se déplacer par rapport à une autre. La figure \ref{fig:viscodyna} montre le modèle utilisé par Newton. Deux plans parallèles de fluides de surfaces égales $S$ sont séparés par une distance $dx$ et se déplacent dans la même direction à des vitesses $V$ et $V+dv$. Newton à supposé que la force nécessaire pour maintenir cette différence de vitesse était proportionnelle au gradient de vitesse. C'est à dire:
 \begin{equation}
 \frac{F}{S} = -\mu \frac{dv}{dx}
@@ -439,12 +439,68 @@ Pour développer son modèle Newton avait supposé que pour une température don
 \item[Les fluides newtoniens] dont le coefficient de viscosité dynamique est indépendant du gradient de vitesse. C'est le cas des gaz, vapeurs, liquides purs de faible masse molaire
 \item[Les fluides non-newtoniens] dont le coefficient de viscosité dynamique dépend du gradient de vitesse. L'étude de ce type de fluides dépend de la rhéologie. Ces fluides sont beaucoup plus communs: purées, gels, sang, boues, peintures, solutions de polymères, ...
 \end{description}
+
 \begin{figure}
 \centering
 \includegraphics[scale=0.5]{viscodyna}
 \caption{Modèle de la viscosité}
 \label{fig:viscodyna}
 \end{figure}
+
+Le coefficient de viscosité correspond au coefficient de diffusion de la quantité de mouvement. C'est grâce à la viscosité que le mouvement d'une couche de fluide peut induire et transmettre des mouvements dans les couches voisines.
+
+\subsubsection{Nombre de Mach\cite{nbmach}}
+C'est un nombre sans dimensions, qui exprime le rapport de la vitesse locale d'un fluide à la vitesse du son dans ce même fluide. Les propriétés d'un fluide variant avec sa nature et sa température, le nombre e de Mach ne correspond pas à une vitesse fixe, il dépend des conditions locales. Il mesure le rapport entre les forces liées au mouvement et la compressibilité du fluide:
+\begin{equation}
+Ma = \frac{U}{a}
+\end{equation}
+Où $Ma$ est le nombre de Mach, $U$ est la vitesse de l'objet par rapport à son environnement et $a$ la vitesse de propagation du son\cite{vitesseson} dans l'environnement considéré. Le nombre de mach caractérise différent types d'écoulements:
+\begin{itemize}
+\item $Ma < 0,94$ : on parle d'écoulement subsonique.
+\item $ 0,94 < Ma < 1,2$ : on parle d'écoulement transsonique.
+\item $1,2 < Ma < 5$ : on parle d'écoulement supersonique.
+\item $Ma > 5$ : on parle d'écoulement hypersonique.
+\end{itemize}
+
+
+Étudions l'exemple d'un objet volant (cf. figure\ref{fig:ecoulementmach}):
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{ecoulementmach}
+\caption{Différents écoulement en fonction du nombre de Mach}
+\label{fig:ecoulementmach}
+\end{figure}
+\begin{description}
+\item[Écoulement subsonique, $Ma<1$] l'objet, qui a une vitesse inférieure à celle de l'accroissement des sphères de perturbation qu'il crée à chaque instant, se trouve en permanence à l'intérieur de celles-ci. Ce déplacement donne également naissance à l'effet Doppler\cite{effetdoppler}.
+\item[Écoulement sonique, $Ma=1$] l'objet colle en permanence à l'avant de toutes les sphères de perturbation, qui se retrouvent toutes tangentes à un plan perpendiculaire au mouvement de l'objet. Cet superposition de petites perturbation augmente considérablement la résistance de l'air: c'est le mur du son.
+\item[Écoulement supersonique, $Ma>1$] l'objet laisse au contraire toutes les sphères de perturbation derrière lui. Un raisonnement simple montre qu'elles sont toutes tangentes à un cône appelé cône de Mach.
+\end{description}
+
+\subsubsection{Description Lagrangienne vs Description Eulérienne}
+La dynamique des fluides dispose de deux techniques d'études: l'approche Lagrangienne et l'approche Eulérienne.
+
+\paragraph{La description Eulérienne\cite{desceuler}} définie à tout instant une valeur pour chaque point de l'espace; en mécanique des fluide c'est généralement un champ de vecteurs vitesses. Le champ de vitesse $V$ donne en tout instant et position le vecteur vitesse associé: $V(M, t)$. Si cette fonction vectorielle ne dépend pas de $t$, l'écoulement et stationnaire. Cette représentation est généralement préférée à l'approche Lagrangienne. La variation de vitesse au cours du temps est alors décrite par la dérivée partielle, encore appelée dérivée Eulérienne.
+
+\paragraph{La description Lagrangienne\cite{desclagrange}} au contraire, suit chacune des particule de fluide dans le temps, le long de leurs trajectoires respectives. Dans ce modèle, la position $M$ d'une particule se trouvant à l'instant $t$ à la position $M_{0}$ est donnée par une relation du type: $M = f(M_{0}, t)$. Avec cette méthode, le référentiel se déplace avec le fluide, il est donc difficile de connaitre l'état du fluide en un point donné de l'espace et du temps. Une variation est définie par la dérivée particulaire, ou totale, ou encore Lagrangienne qui tiens compte de la variation locale du paramètre au cours du temps mais aussi de la variation de celui-ci lié au déplacement de la particule.
+
+\paragraph{Pour passer d'une représentation à l'autre} on utilise la dérivée particulaire. Trouvons la relation entre la dérivé Lagrangienne et la dérivée Eulérienne pour un mouvement à une dimension pour une particule située en $x$ se déplaçant à la vitesse $v$. Un développement limité à l'ordre 1 donne:
+\begin{equation}
+df = f(x+vdt, t+dt) - f(x, t) = \frac{\partial f}{\partial x} vdt + \frac{\partial f}{\partial t} dt
+\end{equation}
+En divisant par $dt$ on obtient la notation conventionnelle:\begin{equation}
+\frac{Df}{Dt} = \frac{\partial f}{\partial t} + v \frac{\partial f}{\partial x}
+\end{equation}
+En généralisant à plusieurs dimensions on obtient:
+\begin{equation}
+\frac{Df}{Dt} = \frac{\partial f}{\partial t} + \overrightarrow{V}\cdot\overrightarrow{grad}(f)
+\end{equation}
+
+\subsubsection{Equation d'Euler\cite{eqeuler}}
+Cette équation s'applique dans le cadre d'un fluide parfait: non visqueux et sans conductivité thermique. Le fluide peut être compressible ou incompressible. En intégrant cette équation sur une ligne de courant, on retrouve l'équation de Bernoulli. L'équation d'Euler dérive du principe fondamental de la dynamique, appliqué à une particule de fluide.
+\begin{equation}
+-\overrightarrow{grad}(p) + \rho\cdot\overrightarrow{g} = \rho\cdot\overrightarrow{a} = \rho\frac{D\overrightarrow{v}}{Dt}
+\end{equation}
+Où $\frac{D }{Dt}$ est la dérivée particulaire ou dérivée totale ou dérivée Lagrangienne.
 
 
 
