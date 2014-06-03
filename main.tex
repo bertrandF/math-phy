@@ -285,6 +285,8 @@ La valeur de la perméabilité magnétique du vide ou constante  magnétique est
 On distingue 3 types de matériaux: dia-magnétiques, paramagnétiques, ferromagnétiques. La perméabilité des matériaux dia-magnétiques et paramagnétiques est très proche de celle du vide. La perméabilité des matériaux ferromagnétiques dépend de l'excitation magnétique $\overrightarrow{H}$. De manière générale, la canalisation du champ magnétique dans un matériaux qui est aussi conducteur est d'autant plus réduite que la fréquence de variation des champs, la perméabilité et la conductivité sont élevées.
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Équations de Maxwell}
 %%%%%%%%%%%%% MAXWELL GAUSS %%%%%%%%%%%%%
 \subsubsection{Maxwell-Gauss}
@@ -362,6 +364,8 @@ A FAIRE
 La mécanique des fluides est une branche de la mécanique des milieux continus qui étudie le comportement des fluides et de leurs forces internes. Elle considère des particules assez petites pour l'analyse mathématique mais plus grande que les molécules pour être décrites comme des fonctions continues, on dit que l'on considère les fluides comme étant continus. Aujourd'hui il y a encore de nombreux problèmes non résolus comme l'étude des turbulences. La recherche utilise systématiquement des outils numériques regroupés sous le terme "Computational fluid dynamics".
 
 \subsection{Propriétés des fluides}
+
+%%%%%%%%%%%%%  PRESENTATION DU PROBLEME  %%%%%%%%%%%%%
 \subsubsection{Présentation du problème \cite{intromecaflu}}
 La viscosité d'un fluide est décrite par son nombre de Reynolds\cite{nbreynolds}. Tous les fluides sont visqueux: le mouvement d'une couche de fluide par rapport à une autre est freinée par des phénomènes de frottement. Pour un fluide Newtonien, la force tangentielle est proportionnelle au taux de variation de la vitesse: ce qui conduit aux équations de Navier-Strokes.
 
@@ -386,6 +390,7 @@ Physiquement on distingue les régimes:
 \item[tourbillonnaires] qui apparait fréquemment dans la transition laminaire-turbulent.
 \end{description}
 
+%%%%%%%%%%%%% FLUIDE COMPRESSIBLE ET INCOMPRESSIBLE %%%%%%%%%%%%%
 \subsubsection{Fluide compressible et incompressible}
 Si les changement de densité d'un fluide ont des effets significatif sur les résultats, on dit que le fluide est compressible. Dans le cas contraire le fluide est incompressible et les changements de densité sont ignorés.
 
@@ -396,6 +401,7 @@ Explication de la compressibilité: en acoustique, l'air doit être considéré 
 c^{2} = (\rho_{0}\chi)^{-1}
 \end{equation}
 
+%%%%%%%%%%%%%  VISCOSITE  %%%%%%%%%%%%%
 \subsubsection{Viscosité}
 Dans les problèmes où les frottements entre les couches de fluides ont des effets non négligeables sur la solution, les fluides sont considérés visqueux. Sinon ils sont appelés non-visqueux. 
 
@@ -403,16 +409,21 @@ Le nombre de Reynolds\cite{nbreynolds} est employé pour estimer quel type d'éq
 
 \textbf{ATTENTION}: il arrive que même si le nombre de Reynolds est élevé, il faille considérer les effets de viscosité, par exemple pour un écoulement autour d'une aile d'avion (cf paradoxe de D'Alembert\cite{paradoxealembert}).
 
+%%%%%%%%%%%%%  ECOULEMENT STATIONNAIRE ET INSTATIONNAIRE %%%%%%%%%%%%%
 \subsubsection{Écoulement stationnaire et instationnaire}
 Le fluide est considéré comme stationnaire si toutes ses propriétés sont considérées comme constantes avec le temps. Ceci constitue une bonne approximation pour des problèmes tels que la trainée d'une aile, la poussée ou un fluide traversant un tuyau. Dans ce cas les équations de Navier-Strokes peuvent être simplifiées.
 
 Si un fluide est incompressible, non-visqueux et stationnaire il peut être résolu avec l'écoulement potentiel découlant de l'équation de Laplace.
 
+%%%%%%%%%%%%%  ECOULEMENT LAMINAIRE ET TURBULENCES %%%%%%%%%%%%%
 \subsubsection{Écoulement laminaire et turbulences}
 La turbulence est un écoulement avec remous et un aspect aléatoire apparent. S'il n'y a pas de turbulences, l'écoulement est laminaire. Les turbulences obéissent à l'équation de Navier-Strokes, cependant la résolution est si complexe qu'il n'est pas possible actuellement de les résoudre numériquement avec les principes de base. Les turbulences sont plutôt modélisées avec un des nombreux modèles de turbulence couplée avec un résolveur de flux laminaires.
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Formules de mécanique des fluides}
+%%%%%%%%%%%%%  NOMBRE RE REYNOLDS %%%%%%%%%%%%%
 \subsubsection{Nombre de Reynolds\cite{nbreynolds}}
 Le nombre de Reynolds est sans dimension. Il caractérise un écoulement: sa nature et son régime (laminaire, transitoire, turbulent ...). Il représente le rapport entre les forces d'intertie et les forces visqueuses. Il est définit tel que:
 \begin{equation}
@@ -420,6 +431,7 @@ Re = \frac{VL}{\upsilon}
 \end{equation}
 Avec $V$ vitesse caractéristique du fluide ($m.s^{-1}$), $L$ dimension caractéristique ($m$), $\upsilon$ viscosité cinématique $(m^{2}.s^{-1})$.
 
+%%%%%%%%%%%%% VISCOSITE CINEMATIQUE  %%%%%%%%%%%%%
 \subsubsection{Viscosité cinématique\cite{viscocinema}}
 La viscosité cinématique représente la capacité de rétention des particules du fluide et quantifie sa capacité à s'épancher. Elle est reliée à la viscosité dynamique par:
 \begin{equation}
@@ -427,6 +439,7 @@ La viscosité cinématique représente la capacité de rétention des particules
 \end{equation}
 Où $\upsilon$ est la viscosité cinématique ($m^{2}.s^{-1}$), $\mu$ le coefficient de viscosité dynamique ($Pa.s$), $\rho$ la masse volumique du fluide ($kg.m^{-3}$).
 
+%%%%%%%%%%%%% VISCOSITE DYNAMIQUE  %%%%%%%%%%%%%
 \subsubsection{Viscosité dynamique\cite{viscodyna,viscodyna2,viscodyna3}}
 La viscosité est une mesure des fictions internes d'un fluide, qui apparait lorsqu'une tranche de fluide doit se déplacer par rapport à une autre. La figure \ref{fig:viscodyna} montre le modèle utilisé par Newton. Deux plans parallèles de fluides de surfaces égales $S$ sont séparés par une distance $dx$ et se déplacent dans la même direction à des vitesses $V$ et $V+dv$. Newton à supposé que la force nécessaire pour maintenir cette différence de vitesse était proportionnelle au gradient de vitesse. C'est à dire:
 \begin{equation}
@@ -449,6 +462,7 @@ Pour développer son modèle Newton avait supposé que pour une température don
 
 Le coefficient de viscosité correspond au coefficient de diffusion de la quantité de mouvement. C'est grâce à la viscosité que le mouvement d'une couche de fluide peut induire et transmettre des mouvements dans les couches voisines.
 
+%%%%%%%%%%%%% NOMBRE DE MACH  %%%%%%%%%%%%%
 \subsubsection{Nombre de Mach\cite{nbmach}}
 C'est un nombre sans dimensions, qui exprime le rapport de la vitesse locale d'un fluide à la vitesse du son dans ce même fluide. Les propriétés d'un fluide variant avec sa nature et sa température, le nombre e de Mach ne correspond pas à une vitesse fixe, il dépend des conditions locales. Il mesure le rapport entre les forces liées au mouvement et la compressibilité du fluide:
 \begin{equation}
@@ -476,6 +490,7 @@ Où $Ma$ est le nombre de Mach, $U$ est la vitesse de l'objet par rapport à son
 \item[Écoulement supersonique, $Ma>1$] l'objet laisse au contraire toutes les sphères de perturbation derrière lui. Un raisonnement simple montre qu'elles sont toutes tangentes à un cône appelé cône de Mach.
 \end{description}
 
+%%%%%%%%%%%%% DESCRIPTION LAGRANGIENNE ET EULERIENNE  %%%%%%%%%%%%%
 \subsubsection{Description Lagrangienne vs Description Eulérienne}
 La dynamique des fluides dispose de deux techniques d'études: l'approche Lagrangienne et l'approche Eulérienne.
 
@@ -495,14 +510,67 @@ En généralisant à plusieurs dimensions on obtient:
 \frac{Df}{Dt} = \frac{\partial f}{\partial t} + \overrightarrow{V}\cdot\overrightarrow{grad}(f)
 \end{equation}
 
-\subsubsection{Equation d'Euler\cite{eqeuler}}
+%%%%%%%%%%%%% POTENTIEL DES VITESSES  %%%%%%%%%%%%%
+\subsubsection{Potentiel des vitesses}
+Si on considère un fluide parfait dans une zone où les turbulences et les tourbillons son négligeables, les particules ont un mouvement de translation sans rotation, donc le rotationnel es nul:
+\[ \overrightarrow{rot}(\overrightarrow{V}) = \overrightarrow{0}\]
+Cette équation à pour solution un gradient (cf. équation \ref{rotgrad}) :
+\[ V = \overrightarrow{grad}(\phi) \]
+Physiquement, cela signifie que la vitesse dérive d'un potentiel, fonction des coordonnées qui décrit à elle seule tout l'écoulement. Si de plus le fluide est incompressible, on a:
+\[ div(\overrightarrow{V}) = 0 \implies div(\overrightarrow{grad}(\phi)) = 0 \implies \Delta \phi = 0 \]
+Le Laplacien est donc nul et le potentiel est une fonction harmonique des coordonnées: ce qui ouvre la voie à une multitude de solutions exactes ou plus souvent numériques.
+
+%%%%%%%%%%%%% EQUATION D'EULER  %%%%%%%%%%%%%
+\subsubsection{Équation d'Euler\cite{eqeuler}}
 Cette équation s'applique dans le cadre d'un fluide parfait: non visqueux et sans conductivité thermique. Le fluide peut être compressible ou incompressible. En intégrant cette équation sur une ligne de courant, on retrouve l'équation de Bernoulli. L'équation d'Euler dérive du principe fondamental de la dynamique, appliqué à une particule de fluide.
 \begin{equation}
 -\overrightarrow{grad}(p) + \rho\cdot\overrightarrow{g} = \rho\cdot\overrightarrow{a} = \rho\frac{D\overrightarrow{v}}{Dt}
 \end{equation}
-Où $\frac{D }{Dt}$ est la dérivée particulaire ou dérivée totale ou dérivée Lagrangienne.
+Où $\frac{D }{Dt}$ est la dérivée particulaire ou dérivée totale ou dérivée Lagrangienne. Ce qui donne en description Eulérienne:
+\begin{equation}
+-\overrightarrow{grad}(p) + \rho\cdot\overrightarrow{g} =  \rho(\frac{\partial \overrightarrow{v}}{\partial t} + \overrightarrow{v}\cdot\overrightarrow{grad}(\overrightarrow{v}))
+\end{equation}
 
+%%%%%%%%%%%%% THEROEME DE BERNOULLI  %%%%%%%%%%%%%
+\subsubsection{Thérorème de Bernoulli\cite{bernoulli}}
+Pour un écoulement incompressible, irrotationnel d'un fluide parfait, en régime permanent et négligeant les transferts de chaleur, on obtient le long d'une ligne de courant:
+\begin{equation}
+\frac{1}{2}\rho v^{2} + \rho g z + p = constante
+\label{eq:bernoulli}
+\end{equation}
+Interprétation énergétique:
+\begin{itemize}
+\item $e_{c} = \frac{1}{V}\frac{1}{2}mv^{2} = \frac{1}{2}\rho v^{2}$, est la densité volumique d'énergie cinétique.
+\item $e_{p} = \frac{1}{V}mgz = \rho gz$, est la densité volumique d'énergie potentielle de gravité.
+\item $e_{p} = \frac{1}{V} pV = p$, est la densité volumique d'énergie due au travail des forces de pression.
+\end{itemize}
+D'où:
+\[ e_{c} + e_{p} + e_{p} = constante \]
+soit l'équation \ref{eq:bernoulli}.
+La formulation thermodynamique donne:
+\begin{equation}
+\frac{1}{2}v^{2} + gz + h = constante
+\end{equation}
+où $h$ désigne l'enthalpie telle que $h = u + \frac{p}{\rho}$
+La formulation pour les fluides compressibles est:
+\begin{equation}
+\frac{1}{2}v^{2} + gz + \frac{\gamma}{\gamma - 1}\frac{p}{\rho g} = constante
+\end{equation}
+où $\gamma$ est le rapport des capacités calorifiques du fluide : $\frac{C_{p}}{C_{v}}$
 
+%%%%%%%%%%%%% FORMULE DE TORRICELLI %%%%%%%%%%%%%
+\subsubsection{Formule de Torricelli}
+Ce principe établit que le carré de la vitesse d'écoulement d'un fluide sous l'effet de la pesanteur est proportionnelle à la hauteur de fluide située au-dessus de l'ouverture par laquelle il s'échappe du cylindre qui le contient (cf. figure \ref{fig:torricelli}).
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{torricelli}
+\caption{Formulation du problème de Torricelli}
+\label{fig:torricelli}
+\end{figure}
+En appliquant le théorème de Bernoulli sur une ligne de courant allant de A à B, et en supposant que la vitesse du fluide en A est négligeable, on obtient la formule suivante:
+\begin{equation}
+v^{2} = 2gh
+\end{equation}
 
 \newpage
 \bibliographystyle{plain}
