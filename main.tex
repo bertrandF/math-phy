@@ -137,6 +137,12 @@ Le rotationnel du rotationnel est:
 \overrightarrow{rot}(\overrightarrow{rot}(\overrightarrow{A})) = \overrightarrow{grad}(div(\overrightarrow{A})) - \Delta A
 \end{equation}
 
+Produit vectoriel du champ par son rotationnel:
+\begin{equation}
+\overrightarrow{A} \land \overrightarrow{rot}(\overrightarrow{A}) = \overrightarrow{grad}(\frac{A^{2}}{2})  - \overrightarrow{A}\cdot\overrightarrow{grad}(\overrightarrow{A})
+\label{vectrotvect}
+\end{equation}
+
 - :
 \begin{equation}
 \overrightarrow{rot}(\overrightarrow{A}\cdot\overrightarrow{grad}(\overrightarrow{A})) = \overrightarrow{A}\cdot\overrightarrow{grad}(\overrightarrow{rot}(\overrightarrow{A})) - \overrightarrow{rot}(\overrightarrow{A})\cdot\overrightarrow{grad}(\overrightarrow{A})
@@ -151,7 +157,7 @@ On définit le gradient comme une grandeur vectorielle qui indique de quelle fa�
 \overrightarrow{grad}(f) = \overrightarrow{\nabla} f = \frac{\partial f}{\partial x}\overrightarrow{x} + \frac{\partial f}{\partial y}\overrightarrow{y} +\frac{\partial f}{\partial z}\overrightarrow{z}
 \end{equation}
 
-Construisons le gradient: soit $M$ et $M'$ deux points de l'espace tels que $M$ soit de coordonées $\overrightarrow{u} = (x,y,z)$ et $\overrightarrow{h} = \overrightarrow{MM'} = (h_{x}, h_{y}, h_{z})$. $T$ est une fonction de l'espace. De $M$ à $M'$, $T$ passe de $T(x,y,z)$ à $T(x+h_{x}, y+h_{y}, z+h_{z})$. En première approximation, cette variation est une fonction linéaire de $\overrightarrow{h}$ :
+Construisons le gradient: soit $M$ et $M'$ deux points de l'espace tels que $M$ soit de coordonnées $\overrightarrow{u} = (x,y,z)$ et $\overrightarrow{h} = \overrightarrow{MM'} = (h_{x}, h_{y}, h_{z})$. $T$ est une fonction de l'espace. De $M$ à $M'$, $T$ passe de $T(x,y,z)$ à $T(x+h_{x}, y+h_{y}, z+h_{z})$. En première approximation, cette variation est une fonction linéaire de $\overrightarrow{h}$ :
 \begin{equation}
 T(x+h_{x}, y+h_{y}, z+h_{z}) = T(x,y,z) + \frac{\partial T}{\partial x}(x,y,z)h_{x}  + \frac{\partial T}{\partial y}(x,y,z)h_{y} + \frac{\partial T}{\partial z}(x,y,z)h_{z}
 \label{graddl1}
@@ -174,7 +180,7 @@ EN dimension 2, le gradient normal à une courbe en un point est la droite tange
 
 En dimension 3, le gradient normal à une surface en un point est le plan tangent.
 
-Gradient et convexité: Soit une application $f: \Re^{n} \mapsto \Re$ où $n \in \{2,3\}$ par exemple, continuement dérivable. Si l'application $\overrightarrow{grad}(f): \Re^{n} \mapsto \Re^{n}$ est monotomne (resp. strictement monotone) alors $f$ est convexe (resp. strictement convexe). C'est à dire en caractérisant par les cordes:
+Gradient et convexité: Soit une application $f: \Re^{n} \mapsto \Re$ où $n \in \{2,3\}$ par exemple, continument dérivable. Si l'application $\overrightarrow{grad}(f): \Re^{n} \mapsto \Re^{n}$ est monotone (resp. strictement monotone) alors $f$ est convexe (resp. strictement convexe). C'est à dire en caractérisant par les cordes:
 \begin{equation}
 \forall (u,v) \in (\Re^{3})^2, \overrightarrow{grad}_{u}(f)\cdot\overrightarrow{grad}_{v}(f) \geq 0 
 \implies
@@ -194,11 +200,22 @@ div(\overrightarrow{grad}(f)) = \Delta f
 \overrightarrow{rot}(\overrightarrow{grad}(f)) = \overrightarrow{0}
 \end{equation}
 
+%%%%%%%%%%%%% ADVECTION %%%%%%%%%%%%%
+\subsection{Advection\cite{advection}}
+Elle correspond au transport d'une quantité (scalaire ou vectorielle) par un champ vectoriel. C'est une notation courante en mécanique des fluides car toutes les caractéristiques d'une particule de fluide sont advectées lors de son déplacement au sein de l'écoulement. L'opérateur advection correspond au produit scalaire du vecteur vitesse par le gradient:
+\begin{equation}
+\overrightarrow{v}\cdot\overrightarrow{grad} = u\frac{\partial}{\partial x} + v\frac{\partial}{\partial y} w\frac{\partial}{\partial z}
+\end{equation}
+Où (u,v,w) sont les coordonnées de $\overrightarrow{v}$. Cet opérateur peut être exprimé sous la forme de Lamb si il est appliqué au même vecteur $\overrightarrow{v}$:
+\begin{equation}
+(\overrightarrow{v}\cdot\overrightarrow{grad})\overrightarrow{v} = \overrightarrow{grad}(\frac{v^{2}}{2}) + \overrightarrow{rot}(\overrightarrow{v}) \land \overrightarrow{v}
+\end{equation}
+
 
 %%%%%%%%%%%%% EQUATION DE LAPLACE %%%%%%%%%%%%%
 \subsection{Équation de Laplace \cite{eqlaplace}}
 \subsubsection{Définition}
-En coordonnées cartésiennes dans un espace euclidine de dimension 3, le problème consiste à trouver lles fonctions $f(x,y,z)$ qui vérifient:
+En coordonnées cartésiennes dans un espace euclidien de dimension 3, le problème consiste à trouver les fonctions $f(x,y,z)$ qui vérifient:
 \begin{equation}
 \frac{\partial^{2} f}{\partial x^{2}} + \frac{\partial^{2} f}{\partial y^{2}} + \frac{\partial^{2} f}{\partial z^{2}} = 0
 \end{equation}
@@ -502,12 +519,21 @@ La dynamique des fluides dispose de deux techniques d'études: l'approche Lagran
 \begin{equation}
 df = f(x+vdt, t+dt) - f(x, t) = \frac{\partial f}{\partial x} vdt + \frac{\partial f}{\partial t} dt
 \end{equation}
-En divisant par $dt$ on obtient la notation conventionnelle:\begin{equation}
+En divisant par $dt$ on obtient la notation conventionnelle:
+\begin{equation}
 \frac{Df}{Dt} = \frac{\partial f}{\partial t} + v \frac{\partial f}{\partial x}
 \end{equation}
-En généralisant à plusieurs dimensions on obtient:
+En généralisant à plusieurs dimensions on obtient (où $\overrightarrow{V}\cdot\overrightarrow{grad}$ est appelé advection\cite{advection}):
 \begin{equation}
-\frac{Df}{Dt} = \frac{\partial f}{\partial t} + \overrightarrow{V}\cdot\overrightarrow{grad}(f)
+\frac{Df}{Dt} = \frac{\partial f}{\partial t} + (\overrightarrow{V}\cdot\overrightarrow{grad})(f)
+\end{equation}
+D'après l'équation \ref{vectrotvect}, on peut écrire l'équation suivante pour un champ de vecteurs $V$. Cette propriété du rotationnel est notamment utilisée lors de l'intégration de l'équation d'Euler sur une ligne de courant:
+\begin{equation}
+\frac{D\overrightarrow{V}}{Dt} = \frac{\partial \overrightarrow{V}}{\partial t} + \overrightarrow{grad}(\frac{V^{2}}{2}) + \overrightarrow{rot}(\overrightarrow{V}) \land \overrightarrow{V} 
+\end{equation}
+Cette formulation permet de faire apparaitre le vecteur tourbillon:
+\begin{equation}
+\Omega(M,t) = \frac{1}{2}\overrightarrow{rot}(\overrightarrow{v}(M,t))
 \end{equation}
 
 %%%%%%%%%%%%% POTENTIEL DES VITESSES  %%%%%%%%%%%%%
@@ -530,28 +556,59 @@ Où $\frac{D }{Dt}$ est la dérivée particulaire ou dérivée totale ou dériv�
 \begin{equation}
 -\overrightarrow{grad}(p) + \rho\cdot\overrightarrow{g} =  \rho(\frac{\partial \overrightarrow{v}}{\partial t} + \overrightarrow{v}\cdot\overrightarrow{grad}(\overrightarrow{v}))
 \end{equation}
+Remarque sur les forces de pression: la force de pression exercée sur un volume V de fluide definit par une surface S est:
+\begin{equation}
+\overrightarrow{F_{pression}} = \iint_{M \in S} -P(M) \overrightarrow{dS(M)} = \iiint_{M \in V} -\overrightarrow{grad}(P(M))d\tau
+\end{equation}
+D'où la petite force de pression volumique est:
+\begin{equation}
+\overrightarrow{f_{vpression}} = -\overrightarrow{grad}(P(M))
+\end{equation}
 
 %%%%%%%%%%%%% THEROEME DE BERNOULLI  %%%%%%%%%%%%%
 \subsubsection{Thérorème de Bernoulli\cite{bernoulli}}
-Pour un écoulement incompressible, irrotationnel d'un fluide parfait, en régime permanent et négligeant les transferts de chaleur, on obtient le long d'une ligne de courant:
+Intégrons l'équation d'Euler sur une ligne de courant (pour pouvoir appliquer l'équation d'Euler, on rappel que le fluide doit être parfait):
 \begin{equation}
-\frac{1}{2}\rho v^{2} + \rho g z + p = constante
+\int_{L}(-\overrightarrow{grad}(P(M)) + \rho\overrightarrow{g})\cdot\overrightarrow{dl} = \int_{L}\rho(\frac{\partial \overrightarrow{v}}{\partial t} + \overrightarrow{grad}(\frac{v^{2}}{2}) +\overrightarrow{rot}(\overrightarrow{v})\land\overrightarrow{v}) \overrightarrow{dl}
+\end{equation}
+Or $\overrightarrow{v}$ et $\overrightarrow{dl}$ sont colinéaire car tout deux tangent à la courbe, d'où:
+\[ (\overrightarrow{rot}(\overrightarrow{v}) \land \overrightarrow{v})\cdot\overrightarrow{dl} = (\overrightarrow{v}\land\overrightarrow{dl})\cdot\overrightarrow{rot}(\overrightarrow{v}) = \overrightarrow{0} \]
+Mais aussi, les forces massiques dérivent le plus souvent d'une énergie potentielle massique donc:
+\[ \overrightarrow{f_{massique}} = -\overrightarrow{grad}(e_{pm})\]
+D'où:
+\begin{equation}
+\int_{L} \frac{\partial\overrightarrow{v}}{\partial t}\cdot\overrightarrow{dl} +\int_{L} \frac{\overrightarrow{grad}(P)}{\rho}\cdot\overrightarrow{dl} + [\frac{v^{2}}{2} + e_{pm}]_{A}^{B}= 0
+\end{equation}
+
+Ainsi en supposant que l'on se place dans un référentiel galiléen, en présence d'un champ de pesanteur uniforme ($e_{pm} = gz + cste$), dans le cadre d'un écoulement homogène (masse volumique indépendante du point), on obtient l'équation de bernoulli généralisée sur une ligne de courant:
+\begin{equation}
+\int_{A}^{B} \frac{\partial \overrightarrow{v}(M)}{\partial t}\cdot\overrightarrow{dl} + [\frac{v^{2}}{2} +gz + \frac{P}{\rho}]_{A}^{B}
+\end{equation}
+
+Si on ajoute la contrainte de régime stationnaire (la constante dépend de la ligne de courant):
+\begin{equation}
+\frac{v^{2}}{2}  + g z + \frac{P}{\rho} = constante(L)
 \label{eq:bernoulli}
 \end{equation}
+
+Et pour un régime stationnaire et un écoulement irrotationnel (la constante ne dépend pas de la ligne de courant):
+\begin{equation}
+\frac{v^{2}}{2}  + g z + \frac{P}{\rho} = constante
+\end{equation}
+
 Interprétation énergétique:
 \begin{itemize}
 \item $e_{c} = \frac{1}{V}\frac{1}{2}mv^{2} = \frac{1}{2}\rho v^{2}$, est la densité volumique d'énergie cinétique.
 \item $e_{p} = \frac{1}{V}mgz = \rho gz$, est la densité volumique d'énergie potentielle de gravité.
 \item $e_{p} = \frac{1}{V} pV = p$, est la densité volumique d'énergie due au travail des forces de pression.
 \end{itemize}
-D'où:
-\[ e_{c} + e_{p} + e_{p} = constante \]
-soit l'équation \ref{eq:bernoulli}.
+
 La formulation thermodynamique donne:
 \begin{equation}
 \frac{1}{2}v^{2} + gz + h = constante
 \end{equation}
 où $h$ désigne l'enthalpie telle que $h = u + \frac{p}{\rho}$
+
 La formulation pour les fluides compressibles est:
 \begin{equation}
 \frac{1}{2}v^{2} + gz + \frac{\gamma}{\gamma - 1}\frac{p}{\rho g} = constante
@@ -559,7 +616,7 @@ La formulation pour les fluides compressibles est:
 où $\gamma$ est le rapport des capacités calorifiques du fluide : $\frac{C_{p}}{C_{v}}$
 
 %%%%%%%%%%%%% FORMULE DE TORRICELLI %%%%%%%%%%%%%
-\subsubsection{Formule de Torricelli}
+\subsubsection{Formule de Torricelli\cite{torricelli}}
 Ce principe établit que le carré de la vitesse d'écoulement d'un fluide sous l'effet de la pesanteur est proportionnelle à la hauteur de fluide située au-dessus de l'ouverture par laquelle il s'échappe du cylindre qui le contient (cf. figure \ref{fig:torricelli}).
 \begin{figure}
 \centering
@@ -571,6 +628,12 @@ En appliquant le théorème de Bernoulli sur une ligne de courant allant de A à
 \begin{equation}
 v^{2} = 2gh
 \end{equation}
+
+
+
+
+
+
 
 \newpage
 \bibliographystyle{plain}
