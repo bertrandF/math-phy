@@ -493,7 +493,6 @@ Où $Ma$ est le nombre de Mach, $U$ est la vitesse de l'objet par rapport à son
 \item $Ma > 5$ : on parle d'écoulement hypersonique.
 \end{itemize}
 
-
 Étudions l'exemple d'un objet volant (cf. figure\ref{fig:ecoulementmach}):
 \begin{figure}
 \centering
@@ -629,10 +628,75 @@ En appliquant le théorème de Bernoulli sur une ligne de courant allant de A à
 v^{2} = 2gh
 \end{equation}
 
+%%%%%%%%%%%%% EQUATIONS DE NAVIER-STROKES %%%%%%%%%%%%%
+\subsubsection{Equations de Navier-Storkes\cite{navierstrokes}}
+Les équations de Navier-Strokes sont des équations aux dérivée partielles non linéaires qui décrivent le mouvement des fluides newtoniens dans l'approximation des milieux continus. La cohérence mathématique de ces équations n'est pas démontrée. Leur résolution constitue l'un des problèmes du prix du millénaire\cite{prixmillenaire}.
+Elle permettent par une résolution approchée de proposer une modélisation des courants océaniques et des mouvements de masses d'air, la simulation numériques du comportement des gatte-ciel ou des ponts, des avions, ou plus trivialement de l'écoulement d'un fluide dans un tuyau.
+
+L'équation de conservation de la masse:
+\begin{equation}
+\frac{\partial \rho}{\partial t} + \overrightarrow{\nabla} \cdot (\rho \vec{v}) = 0
+\end{equation}
+L'équation du bilan de quantité de mouvement:
+\begin{equation}
+\frac{\partial \left( \rho \vec{v} \right)}{\partial t} + \overrightarrow{\nabla} \cdot \left(\rho \vec{v} \otimes \vec{v} \right) = - \overrightarrow{\nabla} p + \overrightarrow{\nabla} \cdot \overline{\overline {\tau}} + \rho \vec{f}
+\end{equation}
+L'équation de bilan de l'énergie:
+\begin{equation}
+\frac{\partial \left( \rho e\right)}{\partial t} + \overrightarrow{\nabla} \cdot \left[ \; \left(\rho e + p\right) \vec{v} \; \right] = \overrightarrow{\nabla} \cdot \left( \overline{\overline {\tau}} \cdot \vec{v} \right) + \rho \vec{f} \cdot \vec{v} -\overrightarrow{\nabla} \cdot  (\vec{\dot{q}}) + r
+\end{equation}
+Avec les notations suivantes:
+\begin{itemize}
+\item $t$ représente le temps en secondes.
+\item $\rho$ la masse volumique en $kg.m^{-3}$
+\item $\vec{v}$ la vitesse eulérienne d'une particule de fluide en $m.s^{-1}$
+\item $p$ la pression en $Pa$
+\item $\overline{\overline {\tau}}$ le tenseur des contraintes visqueuses en $Pa$
+\item $\vec{f}$ la résultantes des forces massiques s'exerçant dans le fluide en $N.kg^{-1}$
+\item $e$ l'énergie totale par unité de masse en $J.kg^{-1}$
+\item $\vec{q}$ le flux de chaleur perdu par conduction thermique en $J.m^{-2}.s^{-1}$
+\item $r$ la perte de chaleur volumique due au rayonnement en $J.m^{-3}.s^{-1}$
+\end{itemize}
+
+Les équations se simplifie dans le cadre d'un écoulement de fluide incompressible. L'équation de de bilan de masse devient:
+\begin{equation}
+div(\vec{v}) = 0
+\end{equation}
+Et le bilan de quantité de mouvement devient:
+\begin{equation}
+\frac{\partial \vec{v}}{\partial t} + (\vec{v}\cdot\vec{grad})(\vec{v}) = -\frac{1}{\rho}\vec{p} + \Upsilon\cdot div(\vec{grad}(\vec{v})) + \vec{f}
+\end{equation}
+Où $\Upsilon$ est la viscosité cinématique en $m^{2}.s^{-1}$.
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Étude de cas}
 
+\subsubsection{Jet d'eau à travers un tuyau}
+On cherche à connaitre la force qu'un opérateur devrait exercer pour maintenir le tuyau. Le problème est décrit dans la figure \ref{fig:tuyau}.
+\begin{figure}
+\centering
+\includegraphics[scale=0.20]{tuyau}
+\caption{Jet d'eau dans un tuyau}
+\label{fig:tuyau}
+\end{figure}
+On note $\Sigma_{c}$ le volume de tuyau étudié (en rouge), $\Sigma_{e}$ le système en entrée à $t$ (en vert) et $\Sigma_{s}$ le système en sortie à $t+dt$ (en vert). Ainsi le système total étudié est tel que : $\Sigma^{*}(t) = \Sigma_{c} + \Sigma_{e}$ et $\Sigma^{*}(t+dt) = \Sigma_{c} + \Sigma_{s}$.
+
+\paragraph{Étude cinématique:} les vitesses $v1$ et $v2$ sont uniformes et on suppose le fluide incompressible, donc $div(\vec{v}) = 0$ (le flux est conservatif) ce qui donne : $\Phi = \iint_{\Sigma_{c}}\vec{v}\cdot\vec{dS} = 0$. D'où:
+\[       \iint_{S1}\vec{v}\cdot\vec{dS} + \iint_{S_{laterale}}\vec{v}\cdot\vec{dS} + \iint_{S2}\vec{v}\cdot\vec{dS} = 0\]
+\[ \iff  \iint_{S1}\vec{v}\cdot\vec{dS} + \iint_{S2}\vec{v}\cdot\vec{dS} = 0\]
+\[ \iff  \vec{v1}\cdot\vec{S1} + \vec{v2}\cdot\vec{S2} = 0 \]
+\[ \iff  v1\cdot S1 = v2\cdot S2 \]
+
+\paragraph{Bilan de quantité de mouvement: } On choisit d'inclure le tuyau dans le système étudié. On note $\vec{p}$ la quantité de mouvement. A la date $t$ et à la date $t+dt$ on a::
+\[\vec{p}(t) = \vec{p_{\Sigma_{c}}}(t) + \vec{p_{\Sigma_{e}}}(t) +  \vec{p_{tuyau}}(t) = \vec{p_{\Sigma_{c}}}(t) + dm_{e}\vec{v1} +  \vec{p_{tuyau}}(t)\]
+\[\vec{p}(t) = \vec{p_{\Sigma_{c}}}(t) + \vec{p_{\Sigma_{e}}}(t) +  \vec{p_{tuyau}}(t) = \vec{p_{\Sigma_{c}}}(t) + dm_{s}\vec{v2} +  \vec{p_{tuyau}}(t)\]
+D-où:
+\[ \vec{dp} = \vec{p}(t+dt) - \vec{p}(t) = d\vec{p_{\Sigma_{c}}} + dm_{s}\vec{v2} - dm_{e}\vec{v1} \]
+Or $d\vec{p_{\Sigma_{c}}} = 0$ car la partie commune à $\Sigma^{*}(t)$ et $\Sigma^{*}(t+dt)$ reste fixe, donc:
+\[ \frac{d\vec{p}}{dt} = \frac{dm_{s}}{dt}\vec{v2} - \frac{dm_{e}}{dt}\vec{v1}\]
+Et en régime permanent $\frac{\partial \rho}{\partial t} = 0$ d'où $div(\rho\vec{v}) = 0$ et le débit massique $D_{m}$ est constant. Ce qui signifie que $\frac{dm_{s}}{dt} = \frac{dm_{e}}{dt}$ et d'après le théorème d'Euler $D_{m}(\vec{v2}-\vec{v1}) = \vec{F}$ où $\vec{F}$ est la somme des forces appliquées au système.
 
 
 \newpage
