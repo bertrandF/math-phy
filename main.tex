@@ -673,6 +673,7 @@ Où $\Upsilon$ est la viscosité cinématique en $m^{2}.s^{-1}$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Étude de cas}
 
+%%%%%%%%%%%%% JET D'EAU A TRAVERS UN TUYAU %%%%%%%%%%%%%
 \subsubsection{Jet d'eau à travers un tuyau}
 On cherche à connaitre la force qu'un opérateur devrait exercer pour maintenir le tuyau. Le problème est décrit dans la figure \ref{fig:tuyau}.
 \begin{figure}
@@ -689,7 +690,7 @@ On note $\Sigma_{c}$ le volume de tuyau étudié (en rouge), $\Sigma_{e}$ le sys
 \[ \iff  \vec{v1}\cdot\vec{S1} + \vec{v2}\cdot\vec{S2} = 0 \]
 \[ \iff  v1\cdot S1 = v2\cdot S2 \]
 
-\paragraph{Bilan de quantité de mouvement: } On choisit d'inclure le tuyau dans le système étudié. On note $\vec{p}$ la quantité de mouvement. A la date $t$ et à la date $t+dt$ on a::
+\paragraph{Bilan de quantité de mouvement:} on choisit \textit{d'inclure le tuyau }dans le système étudié. On note $\vec{p}$ la quantité de mouvement. A la date $t$ et à la date $t+dt$ on a::
 \[\vec{p}(t) = \vec{p_{\Sigma_{c}}}(t) + \vec{p_{\Sigma_{e}}}(t) +  \vec{p_{tuyau}}(t) = \vec{p_{\Sigma_{c}}}(t) + dm_{e}\vec{v1} +  \vec{p_{tuyau}}(t)\]
 \[\vec{p}(t) = \vec{p_{\Sigma_{c}}}(t) + \vec{p_{\Sigma_{e}}}(t) +  \vec{p_{tuyau}}(t) = \vec{p_{\Sigma_{c}}}(t) + dm_{s}\vec{v2} +  \vec{p_{tuyau}}(t)\]
 D-où:
@@ -697,6 +698,47 @@ D-où:
 Or $d\vec{p_{\Sigma_{c}}} = 0$ car la partie commune à $\Sigma^{*}(t)$ et $\Sigma^{*}(t+dt)$ reste fixe, donc:
 \[ \frac{d\vec{p}}{dt} = \frac{dm_{s}}{dt}\vec{v2} - \frac{dm_{e}}{dt}\vec{v1}\]
 Et en régime permanent $\frac{\partial \rho}{\partial t} = 0$ d'où $div(\rho\vec{v}) = 0$ et le débit massique $D_{m}$ est constant. Ce qui signifie que $\frac{dm_{s}}{dt} = \frac{dm_{e}}{dt}$ et d'après le théorème d'Euler $D_{m}(\vec{v2}-\vec{v1}) = \vec{F}$ où $\vec{F}$ est la somme des forces appliquées au système.
+
+\paragraph{Bilan des forces:} étudions la somme des forces appliquées sur le système. On distingue la force volumique de gravité:
+\[ \vec{P} = \iiint \rho\vec{d} d\tau\]
+On distingue aussi la force surfacique de pression:
+\[\iint_{S_{totale}}Pd\vec{S} = \iint_{S1}P1d\vec{S} + \iint_{S_{laterale}}P0d\vec{S} + \iint_{S2}P2d\vec{S}\]
+En remarquant que pour un champ de pression uniforme, l'effort sur une surface fermée est nul, ie $\iint_{S_{fermee}}P0d\vec{S} = 0$, alors:
+\[\vec{F_{pression}} = \iint_{S1}(P1-P0)d\vec{S} + \iint_{S_{totale}}P0d\vec{S} + \iint_{S2}(P2-P0)d\vec{S}\]
+Or $P2$ est à l'air libre donc $P2=P0$ et:
+\[\vec{F_{pression}} = (P1-P0)S1 \vec{e_{x}}\]
+Et on compte aussi la force de l'opérateur sur le tuyau $\vec{F_{op}}$.
+
+\paragraph{Résultat final:}
+On obtient:
+\[\vec{F_{op}} = -\vec{P} + D_{m}v1(\frac{S1}{S2} - 1)\vec{e_{x}} - (P1-P0)S1\vec{e_{x}}\]
+$v1$ peut être obtenue avec l'équation de Bernoulli sur une ligne de courant:
+\[\frac{P1}{\rho} = \frac{P0}{\rho} + \frac{v1^{2}}{2}[\frac{S1}{S2}^(2) - 1]\]
+Et $D_{m}$ est:
+\[ D_{m} = \rho v1 S1 \]
+
+%%%%%%%%%%%%% ROUE À EAU  %%%%%%%%%%%%%
+\subsubsection{Roue à eau}
+\begin{figure}
+\centering
+\includegraphics[scale=0.30]{roue}
+\caption{Roue à eau}
+\label{fig:roue}
+\end{figure}
+Un flux d'eau est projeté contre une pale d'une roue à eau (figure \ref{fig:roue}). On considère que la plaque est en translation rectiligne uniforme à la vitesse $u=\omega R$. On prend également $\vec{v1} = v1 \vec{e_{x}}$ et $\vec{v1} = v1 \vec{e_{r}}$. L'objectif est de trouver la force qui s'exerce sur la plaque, pour cela l'étude sera menée dans le référentiel lié à la plaque qui est galiléen. Dans ce référentiel la vitesse du fluide est $\vec{v1'} = (v1-u) \vec{e_{x}}$. Le fluide est l'eau qui est incompressible, donc $div(\vec{v}) = 0$ et $\iint_{S_{fermee}}\vec{v}d\vec{S} = 0$ d'où:
+\[ v1'\cdot S1 = v2'\cdot (2\pi r \cdot e(r))\]
+En appliquant le théorème de Bernoulli sur la ligne de courant allant de A à B, (ici la constante dépend de la ligne de courant considérée étant donné que le rotationnel de la vitesse n'est pas nul) et en négligeant la différence de hauteur entre A et B et en remarquant que $P1 = P2 = P0$ car à l'air libre:
+\[v1' = v2' \iff \vec{v2'} = (v1 - u)\vec{e_{r}}\]
+
+\paragraph{Étude dynamique:} on choisit de ne pas inclure la plaque dans le système étudié (contrairement à l'étude du tuyau on ce dernier avait été inclus). Inclure la plaque dans le système aurait grandement facilité l'étude des forces de pressions puisque qu'il y aurait eu $P0$ partout. On se réfèrera à la figure \ref{fig:roue2} pour l'étude dynamique.
+\begin{figure}
+\centering
+\includegraphics[scale=0.30]{roue2}
+\caption{Roue à eau2}
+\label{fig:roue2}
+\end{figure}
+Faisons le bilan de quantité de mouvement.
+
 
 
 \newpage
