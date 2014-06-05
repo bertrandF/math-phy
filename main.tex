@@ -734,10 +734,43 @@ En appliquant le théorème de Bernoulli sur la ligne de courant allant de A à 
 \begin{figure}
 \centering
 \includegraphics[scale=0.30]{roue2}
-\caption{Roue à eau2}
+\caption{Roue à eau 2}
 \label{fig:roue2}
 \end{figure}
 Faisons le bilan de quantité de mouvement.
+\[ \vec{p_{\Sigma / Plaque}}(t) = \vec{p_{\Sigma_{c}}}(t) + \vec{p_{\Sigma_{e}}}(t) = \vec{p_{\Sigma_{c}}}(t) + dm_{e}(\vec{v1} - \vec{u}) \]
+\[ \vec{p_{\Sigma / Plaque}}(t+dt) = \vec{p_{\Sigma_{c}}}(t+dt) + \vec{p_{\Sigma_{s}}}(t+dt) = \vec{p_{\Sigma_{c}}}(t+dt) + \iiint_{\Sigma_{s}}dm_{s}(v1 - u)\vec{e_{r}}\]
+Or $dm_{s} = \rho rd\theta drdz$, d'où $\vec{p_{\Sigma_{s}}}(t+dt) = \vec{0}$, ainsi:
+\[d\vec{p_{\Sigma / Plaque}} = d\vec{p_{\Sigma_{c}}} - dm_{e}(v1-u)\vec{e_{x}}\]
+Or en régime permanent $d\vec{p_{\Sigma_{c}}} = \vec{0}$, et:
+\[ \frac{d\vec{p_{\Sigma_{c}}}}{dt} = -\frac{dm_{e}}{dt}(v1 - u)\vec{e_{x}} = \vec{F_{ext}}  \]
+
+Étudions les forces extérieures appliquées a notre système.\newline
+Force volumique: $\iiint \rho\vec{g}d\tau = \vec{P_{oids}}$\newline
+Force surfacique: $\iint P_{ression}d\vec{S} = \iint_{\Sigma^{*} + plaque - plaque}P_{0}d\vec{S} = \iint_{plaque}P_{0}d\vec{S} = -P_{0}(\pi r^{2})(-\vec{e_{x}})$\newline
+autre force: $\vec{F_{plaque / jet}}$
+
+Étudions le bilan des forces appliquées sur la plaque dans R.
+\[m\vec{a} = \vec{F_{eau / plaque}} + \vec{F_{jet / plaque}} + \vec{F_{air / plaque}}\]
+Or la plaque est en translation rectiligne uniforme:
+\[ \vec{F_{eau / plaque}} = - (\vec{F_{jet / plaque}} + \vec{F_{air / plaque}}) \]
+Or:
+\[\vec{F_{air / plaque}} = \iint_{S ouverte}P_{0}d\vec{S} = \iint_{plaque totale}P_{0}d\vec{S} - \iint_{S eau / plaque}P_{0}d\vec{S} = -P_{0}\pi r^{2}\vec{e_{z}}\]
+D'où le bilan des forces devient:
+\[\vec{F_{eau / plaque}} = \vec{F_{plaque / eau}} + P_{0}\pi r^{2}\vec{e_{z}}\]
+\[\iff \vec{F_{eau / plaque}}  = - Dm(\vec{v1} - \vec{u}) - P_{0}\pi r^{2}\vec{e_{z}} + P_{0}\pi r^{2}\vec{e_{z}} \]
+\[\iff \vec{F_{eau / plaque}} = - Dm(\vec{v1} - \vec{u})\]
+
+\paragraph{Exploitation des résultats:} Le débit massique dans le référentiel lié à la plaque est en translation rectiligne uniforme est:
+\[ Dm = \rho S (v1 - u) = \frac{dm}{dt} = \rho \frac{d\tau}{dt} = \rho S \frac{dl}{dt} = \rho S \frac{(\vec{v1}-\vec{u}) dt}{dt}\]
+D'où:
+\[ \vec{F_{op}} = -\rho S (\vec{v1} - \vec{u})^{2}\]
+La puissance dissipée par la force est:
+\[ P = \vec{F}\cdot\vec{u} = -\rho S (v - u)^{2}\]
+
+La force exercée par l'eau sur la plaque est:
+\[\vec{F} = \rho S v1^{2} (1 - \frac{u}{v1})^{2}\vec{e_{z}}\]
+
 
 
 
