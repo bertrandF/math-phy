@@ -365,6 +365,94 @@ En appliquant l'opérateur divergence à la formule \ref{MaxAmp}, on obtient:
 div(\overrightarrow{j}) + \frac{\partial \rho}{\partial t} = 0
 \end{equation}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Électrocinétique}
+%%%%%%%%%%%%% THEVENIN NORTON %%%%%%%%%%%%%
+\subsubsection{Théorème de Thévenin et de Norton}
+\paragraph{Thévenin: } Tout circuit linéaire vu de deux points A et B est équivalent à un générateur de tension unique ($V_{A} - V_{B} = E_{th}$) en série avec une résistance ($T_{TH} = R_{AB}$) obtenue en rendant le circuit passif (on cours circuite les générateurs de tension et on ouvre les générateurs de courant).
+\paragraph{Norton: } Tout circuit linéaire vu de deux points A et B est équivalent à un générateur de courant en parallèle avec une résistance.
+
+%%%%%%%%%%%%% IMPEDANCE %%%%%%%%%%%%%
+\subsubsection{Impédance}
+Impédances:
+\begin{description}
+\item[Bobine] $Z = jL\omega$. Pour un signal continu, l'impédance est donc \textbf{nulle} (cours-circuit). Pour une fréquence élevée, l'impédance est \textbf{infinie} (circuit ouvert).
+\item[Condensateur] $Z = \frac{1}{jC\omega}$.  Pour un signal continu, l'impédance est donc \textbf{infinie} (circuit ouvert). Pour une fréquence élevée, l'impédance est \textbf{nulle} (cours-circuit).
+\end{description}
+
+%%%%%%%%%%%%% EQUIVALENCES %%%%%%%%%%%%%
+\subsubsection{Équivalences}
+\begin{description}
+\item[Impédances en parallèle: ] $Z_{eq} = \frac{Z_{1}Z_{2}}{Z_{1} + Z_{2}}$
+\item[Pont diviseur de tension: ] $V_{2} = V\frac{Z_{2}}{Z_{1} + Z_{2}}$
+\item[Pont diviseur de courant: ] $I_{2} = I\frac{Z_{2}}{Z_{1} + Z_{2}}$
+\end{description}
+
+%%%%%%%%%%%%% INTEGRATION DERIVATION %%%%%%%%%%%%%
+\subsubsection{Dérivation et intégration d'un signal}
+Soit un signal $x(t) = X_{m} cos(\omega t + \phi)$.
+\paragraph{Intégration: } Soit $f(t)$ la primitive de $x(t)$. Alors $f(t) = \frac{X_{m}}{\omega} sin(\omega t + \phi) =  \frac{X_{m}}{\omega} cos(\omega t + \phi - \frac{\pi}{2})$. D'où en passant en notation complexe: $F = \frac{X_{m}}{\omega} e^{j(\phi - \frac{\pi}{2})} = \frac{X_{m}}{j\omega} e^{j\phi}$. Et le résultat:
+\begin{equation}
+F = \frac{X}{j\omega}
+\end{equation}
+\paragraph{Dérivation: } De même on peut montrer que pour la dérivation on a (en notant $G$ la dérivée):
+\begin{equation}
+G = j\omega X
+\end{equation}
+
+%%%%%%%%%%%%% PUISSANCE EN REGIME SINUSOIDAL %%%%%%%%%%%%%
+\subsubsection{Puissance en régime sinusoïdal}
+Pour un dipôle linéaire en régime sinusoïdal soumit à la tension $u(t) = U\sqrt{2}.cos(\omega t)$ et au courant $i(t) = I\sqrt{2}.cos(\omega t + \phi)$, la puissance reçue est:
+\begin{equation}
+p(t) = u(t).i(t) = UI.cos(\phi) + UI.cos(2\omega t + \phi)
+\end{equation}
+Composé d'un terme \textit{constant} de puissance moyenne (ou active)  et d'un terme de puissance fluctuante. En notation complexe cela devient ($\Re e()$ la partie réelle): 
+\begin{equation}
+P = \frac{1}{2} \Re e(U.I^{*})
+\end{equation}
+
+\paragraph{Transfert de puissance} Si l'on considère un générateur de tension $V_{s}$ d'impédance $Z_{s}$ branché sur une charge d'impédance équivalente $Z_{l}$ (cf. fugure \ref{fig:impedance_src_chg}), la puissance transmise du générateur à la charge est maximum pour $Z_{s} = Z_{l}^{*}$.  Ce résultat est important pour les chaines HiFis: on veut que le maximum de puissance sortant de l'ampli arrive aux hauts-parleurs, il est donc important de les choisir en conséquence.
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{Source_and_load_circuit_Z}
+\caption{Circuit source sur charge}
+\label{fig:impedance_src_chg}
+\end{figure}
+
+%%%%%%%%%%%%% EDF %%%%%%%%%%%%%
+\subsubsection{EDF}
+\paragraph{Modélisation d'une ligne électrique}
+\begin{figure}
+\centering
+\includegraphics[scale=0.20]{modelisation_ligne}
+\caption{Modélisation d'une ligne haute tension}
+\label{fig:model_ligne}
+\end{figure}
+Une ligne de courant est modélisée par la figure \ref{fig:model_ligne}. Un générateur fournit la tension $U_{g}(t)$ et le courant parcourant la ligne est $i(t)$. Les pertes d'énergie sur la ligne sont uniquement dues à l'effet Joules; la puissance dissipée est notée $P_{j} = R.I^{2}$. On note également $P_{g}$ la puissance fournie par le générateur et $P_{ut} = UIcos(\phi)$ la puissance moyenne consommée par l'utilisateur. Le redement de la ligne est:
+\begin{equation}
+n = \frac{P_{ut}}{P_{g}} = \frac{P_{ut}}{P_{ut} + P_{j}} = \frac{1}{1 + \frac{P_{j}}{P_{ut}}}
+\end{equation}
+On sait que $I = \frac{P_{ut}}{U cos(\phi)}$ et $P_{j} = R.I^{2}$ d'où l'équation précédente devient:
+\begin{equation}
+n = \frac{1}{1 + \frac{R.P_{ut}}{U^{2}cos^{2}(\phi)}}
+\end{equation}
+
+Pour que le rendement soit maximum il faut:
+\begin{enumerate}
+\item R soit a plus faible possible. Pour un conducteur métallique on a $R = \sigma \frac{l}{S}$ où $l$ est la logeur du conducteur, $S$ sa section, et $\sigma$ sa conductivité. Il faut donc $\sigma$ faible (ex: cuivre, aluminium) et une ligne avec une grande section.
+\item U soit le plus grand possible, On fait du transport très haute tension (THT = ~ 400kV).
+\item Il faut que $cos(\phi)$ soit le plus grand possible
+\end{enumerate}
+
+\paragraph{Relèvement du $cos(\phi)$ d'une installation}
+En général, $0,2 < cos(\phi) < 0,8$, mais EDF impose $cos(\phi) > 0,928$. Solution: on ajoute des batteries de condensateur en dérivation avec la ligne (cf figure \ref{fig:ligne_condo}).
+On a $I_{edf}(t) = I_{c}(t) + I_{ut}(t)$, le schéma de droite montre facilement l'effet du condensateur sur le courant.
+\begin{figure}
+\centering
+\includegraphics[scale=0.20]{ligne_condo}
+\caption{Modélisation d'une ligne haute tension avec condensateurs}
+\label{fig:ligne_condo}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ANTENNES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -692,7 +780,7 @@ On note $\Sigma_{c}$ le volume de tuyau étudié (en rouge), $\Sigma_{e}$ le sys
 
 \paragraph{Bilan de quantité de mouvement:} on choisit \textit{d'inclure le tuyau }dans le système étudié. On note $\vec{p}$ la quantité de mouvement. A la date $t$ et à la date $t+dt$ on a::
 \[\vec{p}(t) = \vec{p_{\Sigma_{c}}}(t) + \vec{p_{\Sigma_{e}}}(t) +  \vec{p_{tuyau}}(t) = \vec{p_{\Sigma_{c}}}(t) + dm_{e}\vec{v1} +  \vec{p_{tuyau}}(t)\]
-\[\vec{p}(t) = \vec{p_{\Sigma_{c}}}(t) + \vec{p_{\Sigma_{e}}}(t) +  \vec{p_{tuyau}}(t) = \vec{p_{\Sigma_{c}}}(t) + dm_{s}\vec{v2} +  \vec{p_{tuyau}}(t)\]
+\[\vec{p}(t+dt) = \vec{p_{\Sigma_{c}}}(t+dt) + \vec{p_{\Sigma_{e}}}(t+dt) +  \vec{p_{tuyau}}(t+dt) = \vec{p_{\Sigma_{c}}}(t+dt) + dm_{s}\vec{v2} +  \vec{p_{tuyau}}(t+dt)\]
 D-où:
 \[ \vec{dp} = \vec{p}(t+dt) - \vec{p}(t) = d\vec{p_{\Sigma_{c}}} + dm_{s}\vec{v2} - dm_{e}\vec{v1} \]
 Or $d\vec{p_{\Sigma_{c}}} = 0$ car la partie commune à $\Sigma^{*}(t)$ et $\Sigma^{*}(t+dt)$ reste fixe, donc:
@@ -713,7 +801,7 @@ Et on compte aussi la force de l'opérateur sur le tuyau $\vec{F_{op}}$.
 On obtient:
 \[\vec{F_{op}} = -\vec{P} + D_{m}v1(\frac{S1}{S2} - 1)\vec{e_{x}} - (P1-P0)S1\vec{e_{x}}\]
 $v1$ peut être obtenue avec l'équation de Bernoulli sur une ligne de courant:
-\[\frac{P1}{\rho} = \frac{P0}{\rho} + \frac{v1^{2}}{2}[\frac{S1}{S2}^(2) - 1]\]
+\[\frac{P1}{\rho} = \frac{P0}{\rho} + \frac{v1^{2}}{2}[(\frac{S1}{S2})^{2} - 1]\]
 Et $D_{m}$ est:
 \[ D_{m} = \rho v1 S1 \]
 
